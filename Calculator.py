@@ -50,6 +50,12 @@ correct_remainder = "\nThe Correct remainder is "
 
 final_score = "Your score is "
 
+seperator3 = "=" * 100
+
+right_comment = ["Exellent", "Amazing", "Brilliant", "Wow", "Unbelievable", "Good job", "Awesome", "Wonderful", "Marvellous","Incredible", "Mind-blowing"]
+
+wrong_comment = ["Better luck next time", "Well tried", "You can do better than this", "A little practice is all you need"]
+
 
 def printcenter(abc):
     print abc.center(150)
@@ -60,7 +66,7 @@ def banner():
     design_for_my_name = "***********************"
     my_name = "*Created by Mahip Jain*"
     seperator_for_game_name = "-" *100
-    description = "This is an educational game made for kids to improve their mathematical skills. There are 3 levels, Easy, Medium and Hard. There is a set of ten questions for\neach level and a timer for each question. I hope you enjoy using this game.\n"
+    description = "This is an educational game made for kids to improve their mathematical skills. There are 3 levels, Easy, Medium and Hard. There is a set of ten questions for\neach level. I hope you enjoy using this game.\n"
     printcenter(design_for_game_name)
     printcenter(game_name)
     printcenter(design_for_game_name)
@@ -73,6 +79,9 @@ def banner():
 
 def get_age():
     age = raw_input(enter_age)
+    while age.isdigit() == False:
+        print only_numbers
+        age = raw_input(enter_age)
 
     return int(age)
 
@@ -120,6 +129,8 @@ def run_problem_generator(age, level):
     random1 = 0
     random2 = ""
     random3 = 0
+    random4 = []
+    random5 = []
     score = 0
     lst2 = [add]
     minimum = 1
@@ -148,13 +159,15 @@ def run_problem_generator(age, level):
         level2()
     else:
         level3()
-    printcenter(seperator2)
+    print seperator2
 
     while a < maxquestions + 1:
 
         random1 = random.randint(minimum,maximum)
         random2 = random.choice(lst2)
         random3 = random.randint(minimum, maximum)
+        random4 = random.choice(right_comment)
+        random5 = random.choice(wrong_comment)
         print random1, random2, random3, "\n"
         answer = 0
         if random2 == add or random2 == minus or random2 == multiply:
@@ -163,44 +176,49 @@ def run_problem_generator(age, level):
         if random2 == add:
             if answer == random1 + random3:
                 print correct_ans
+                print random4
                 score += 1
             else:
                 print incorrect_ans
                 print correct_ans_is, random1 + random3
+                print random5
         elif random2 == minus:
             if answer == random1 - random3:
                 print correct_ans
+                print random4
                 score += 1
             else:
                 print incorrect_ans
                 print correct_ans_is, random1 - random3
+                print random5
         elif random2 == multiply:
             if answer == random1 * random3:
                 print correct_ans
+                print random4
                 score += 1
             else:
                 print incorrect_ans
                 print correct_ans_is, random1 * random3
+                print random5
         else:
             quotient = get_userinput(raw_inp_quotient)
             remainder = get_userinput(raw_inp_remainder)
             if quotient == random1 / random3 and remainder == random1 - quotient * random3:
                 print correct_ans
+                print random4
                 score += 1
 
             else:
                 print incorrect_ans
                 print correct_quotient, random1 / random3, correct_remainder, random1 - quotient * random3
+                print random5
 
-        print "score =", score, divide, a
+        print "score =", score, divide, a, "\n"
         a += 1
-    print final_score, score, divide, maxquestions
+    print final_score, score, divide, maxquestions, "\n"
 
 
-def main():
-    banner()
-    age = get_age()
-    name = get_name()
+def continue_or_not(name, age):
     while True:
         level = info_for_level(name)
         run_problem_generator(age, level)
@@ -208,7 +226,14 @@ def main():
         if_want_to_quit = raw_input("Type yes or no:")
         if if_want_to_quit == "no" or if_want_to_quit == "No":
             break
+        print seperator3
 
+
+def main():
+    banner()
+    age = get_age()
+    name = get_name()
+    continue_or_not(name, age)
 
 
 main()
