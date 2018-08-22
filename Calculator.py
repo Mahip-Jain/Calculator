@@ -57,10 +57,11 @@ right_comment = ["Exellent", "Amazing", "Brilliant", "Wow", "Unbelievable", "Goo
 wrong_comment = ["Better luck next time", "Well tried", "You can do better than this", "A little practice is all you need"]
 
 
-def printcenter(abc):
+def printcenter(abc):  #this function prints things in the center using center command
     print abc.center(150)
 
-def banner():
+
+def banner():  #this function prints the title and description of the project
     design_for_game_name = "########################"
     game_name = "#MATH PROBLEM GENERATOR#"
     design_for_my_name = "***********************"
@@ -77,7 +78,7 @@ def banner():
     print description
 
 
-def get_age():
+def get_age():  #this function takes the age of the user and validates for alphabets
     age = raw_input(enter_age)
     while age.isdigit() == False:
         print only_numbers
@@ -86,12 +87,12 @@ def get_age():
     return int(age)
 
 
-def get_name():
+def get_name():  #this funaction takes the name of the user
     name = raw_input(enter_name)
     return name
 
 
-def info_for_level(name):
+def info_for_level(name):  #this function prints which numbers are which level and validates for numbers which are not 1,2 or 3  and for alphabets
     print welcome + " " + str(name) + " " + "!!\n"
     print if_level_easy
     print if_level_medium
@@ -111,10 +112,10 @@ def info_for_level(name):
     return int(level)
 
 
-def run_problem_generator(age, level):
+def run_problem_generator(age, level):  #this function prints the question, takes the answer and corrects it if wrong. It also validates the answer for thing which are not numbers
     import random
 
-    def get_userinput(message):
+    def get_userinput(message):  #validation for answer
         while True:
             try:
                 userInput = int(input(message))
@@ -173,6 +174,7 @@ def run_problem_generator(age, level):
         if random2 == add or random2 == minus or random2 == multiply:
             answer = get_userinput(ans)
 
+        #correction
         if random2 == add:
             if answer == random1 + random3:
                 print correct_ans
@@ -218,7 +220,7 @@ def run_problem_generator(age, level):
     print final_score, score, divide, maxquestions, "\n"
 
 
-def continue_or_not(name, age):
+def continue_or_not(name, age):  #this function checks weather you want to continue the game or not
     while True:
         level = info_for_level(name)
         run_problem_generator(age, level)
@@ -229,7 +231,7 @@ def continue_or_not(name, age):
         print seperator3
 
 
-def main():
+def main():  #this function calls all of the other functions
     banner()
     age = get_age()
     name = get_name()
