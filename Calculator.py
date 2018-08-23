@@ -1,3 +1,4 @@
+import sys
 only_numbers = "Sorry, you are only allowed to enter numbers"
 
 maxquestions = 10
@@ -87,13 +88,13 @@ def get_age():  #this function takes the age of the user and validates for alpha
     return int(age)
 
 
-def get_name():  #this funaction takes the name of the user
+def get_name():  #this function takes the name of the user
     name = raw_input(enter_name)
     return name
 
 
 def info_for_level(name):  #this function prints which numbers are which level and validates for numbers which are not 1,2 or 3  and for alphabets
-    print welcome + " " + str(name) + " " + "!!\n"
+    print welcome + " " + name + " " + "!!\n"
     print if_level_easy
     print if_level_medium
     print if_level_hard
@@ -118,8 +119,10 @@ def run_problem_generator(age, level):  #this function prints the question, take
     def get_userinput(message):  #validation for answer
         while True:
             try:
-                userInput = int(input(message))
-            except:
+                userInput = int(raw_input(message))
+            except KeyboardInterrupt:
+                sys.exit()
+            except (ValueError, NameError) as e:
                 print(not_num)
                 continue
             else:
